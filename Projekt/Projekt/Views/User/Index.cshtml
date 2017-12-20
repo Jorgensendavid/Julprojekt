@@ -21,6 +21,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Alias)
             </td>
+            <td>
+                @Html.ActionLink("Post", "Index", "Post", new {id = item.Id}, new { } )
+            </td>
            
         </tr>
     }
