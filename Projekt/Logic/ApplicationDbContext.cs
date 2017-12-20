@@ -1,5 +1,6 @@
 ﻿using System.Data.Entity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using Logic;
 
 namespace Projekt.Models
 {
@@ -15,5 +16,8 @@ namespace Projekt.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Post> Posts { get; set; }
     }
+
 }
