@@ -1,4 +1,5 @@
-﻿using Projekt.Models;
+﻿using Logic;
+using Projekt.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

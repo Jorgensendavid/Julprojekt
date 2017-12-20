@@ -2,7 +2,7 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 using Logic;
 
-namespace Projekt.Models
+namespace Logic
 {
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
