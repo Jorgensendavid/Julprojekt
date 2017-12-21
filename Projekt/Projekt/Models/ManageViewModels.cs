@@ -83,4 +83,16 @@ namespace Projekt.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
+
+    public class editProfileViewModel
+    {
+        [Required]
+        [Display(Name = "Information about you")]
+        public string About { get; set; }
+
+        [Required]
+        [Display(Name = "New name")]
+        public string NewName { get; set; }
+    }
+
 }
