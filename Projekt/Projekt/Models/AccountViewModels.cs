@@ -80,6 +80,8 @@ namespace Projekt.Models
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
         public string Alias { get; set; }
+        [Display(Name = "Userphoto")]
+        public byte[] UserPhoto { get; set; }
     }
 
     public class ResetPasswordViewModel
@@ -109,5 +111,9 @@ namespace Projekt.Models
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    }
+    public class SearchViewModel
+    {
+        public string Query { get; set; }
     }
 }

@@ -213,6 +213,8 @@ namespace Projekt.Controllers
             return RedirectToAction("Index", new { Message = ManageMessageId.RemovePhoneSuccess });
         }
 
+
+
         //
         // GET: /Manage/ChangePassword
         public ActionResult ChangePassword()

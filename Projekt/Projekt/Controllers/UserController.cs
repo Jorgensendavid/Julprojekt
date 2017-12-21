@@ -8,10 +8,18 @@ namespace Projekt.Controllers
 {
     public class UserController : BaseController
     {
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            var users = db.Users.ToList();
-            return View(users);
+            
+            var findUser = from m in db.Users
+                         select m;
+
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                findUser = findUser.Where(s => s.Email.Contains(searchString));
+            }
+            return View(findUser);
         }
+      
     }
 }

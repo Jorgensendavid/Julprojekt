@@ -29,6 +29,12 @@ namespace Projekt.Controllers
 
             var toUser = db.Users.Single(x => x.Id == id);
             post.To = toUser;
+             Post obj = new Post();
+                obj.From = user;
+                obj.To = toUser;
+                obj.Text = post.Text;
+                db.Posts.Add(obj);
+                db.SaveChanges();
             db.Posts.Add(post);
             db.SaveChanges();
             return RedirectToAction("Index", new { id = id });

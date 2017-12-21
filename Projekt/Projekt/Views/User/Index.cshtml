@@ -9,17 +9,24 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Alias)
+          
         </th>
         <th></th>
     </tr>
-
+    @using (Html.BeginForm())
+    {
+        <p>
+            Search name: @Html.TextBox("SearchString") <br />
+            <input type="submit" value="Filter" />
+        </p>
+    }
+    
     @foreach (var item in Model)
     {
         <tr>
 
             <td>
-                @Html.DisplayFor(modelItem => item.Alias)
+                @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.ActionLink("Post", "Index", "Post", new {id = item.Id}, new { } )
