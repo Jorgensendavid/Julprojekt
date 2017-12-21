@@ -116,8 +116,10 @@ namespace Projekt.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
-    public class SearchViewModel
+    public class ProfileViewModel
     {
-        public string Query { get; set; }
+        public string TextAbout { get; set; }
+        public string Alias { get; set; }
     }
+
 }

@@ -13,14 +13,19 @@ namespace Projekt.Controllers
         UserRepository userRepository = new UserRepository();
         public ActionResult Index(string searchString)
         {
-            
-            var findUser = from m in db.Users
-                         select m;
 
-            if (!string.IsNullOrEmpty(searchString))
-            {
-                findUser = findUser.Where(s => s.Email.Contains(searchString));
-            }
+            var findUser = from m in db.Users
+                           select m;
+            
+
+           
+            
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    findUser = findUser.Where(s => s.Email.Contains(searchString));
+
+                }
+            
             return View(findUser);
         }
       
@@ -41,6 +46,19 @@ namespace Projekt.Controllers
             applicationUser.TextAbout = model.About;
             userRepository.edit(applicationUser);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult ProfileInfo()
+        {
+            var user = userRepository.getUserName(User.Identity.Name);
+            ProfileViewModel model = new ProfileViewModel()
+            {
+                Alias = user.Alias,
+                TextAbout = user.TextAbout,
+
+
+            };
+            return View(model);
         }
     }
 }
