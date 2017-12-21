@@ -82,6 +82,10 @@ namespace Projekt.Models
         public string Alias { get; set; }
         [Display(Name = "Userphoto")]
         public byte[] UserPhoto { get; set; }
+        [Display(Name = "Invisible?")]
+        public string Invisible { get; set; }
+
+
     }
 
     public class ResetPasswordViewModel
