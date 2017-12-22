@@ -122,4 +122,11 @@ namespace Projekt.Models
         public string Alias { get; set; }
     }
 
+    public class ViewProfilesModel
+    {
+        public string TextAbout { get; set; }
+        public string Alias { get; set; }
+        public string ProfileID { get; set; }
+    }
+
 }

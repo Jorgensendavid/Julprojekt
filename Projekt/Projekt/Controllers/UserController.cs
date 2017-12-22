@@ -46,18 +46,32 @@ namespace Projekt.Controllers
             userRepository.edit(applicationUser);
             return RedirectToAction("Index");
         }
-
-        public ActionResult ProfileInfo()
+        [Authorize]
+        public ActionResult ProfileInfo(ProfileViewModel model)
         {
             var user = userRepository.getUserName(User.Identity.Name);
-            ProfileViewModel model = new ProfileViewModel()
+
+            model.Alias = user.Alias;
+            model.TextAbout = user.TextAbout;
+
+
+            
+            return View(model);
+        }
+
+        [Authorize]
+        public ActionResult OthersProfileInfo(string id)
+        {
+            var user = userRepository.getUserId(id);
+
+            ViewProfilesModel watchProfiles = new ViewProfilesModel()
             {
                 Alias = user.Alias,
                 TextAbout = user.TextAbout,
-
-
+                ProfileID = id
+               
             };
-            return View(model);
+            return View(watchProfiles);
         }
     }
 }

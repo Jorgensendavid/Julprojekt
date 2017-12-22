@@ -12,9 +12,10 @@ namespace Projekt.Controllers
 {
     public class HomeController : Controller
     {
+        UserRepository userRepository = new UserRepository();
         public ActionResult Index()
         {
-            return View();
+            return View(userRepository.StartUsers());
         }
 
         public ActionResult About()
