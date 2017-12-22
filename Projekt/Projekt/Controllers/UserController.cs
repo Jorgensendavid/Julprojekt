@@ -21,7 +21,7 @@ namespace Projekt.Controllers
             
                 if (!string.IsNullOrEmpty(searchString))
                 {
-                    findUser = findUser.Where(s => s.Email.Contains(searchString));
+                    findUser = findUser.Where(s => s.Alias.Contains(searchString));
 
                 }
             
