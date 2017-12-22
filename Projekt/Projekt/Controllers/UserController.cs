@@ -11,14 +11,13 @@ namespace Projekt.Controllers
     public class UserController : BaseController
     {
         UserRepository userRepository = new UserRepository();
-        public ActionResult Index(string searchString)
+        public ActionResult Index(string searchString,ApplicationUser model)
         {
 
             var findUser = from m in db.Users
-                           select m;
-            
+                           where m.invisibile == true
+                           select m ;
 
-           
             
                 if (!string.IsNullOrEmpty(searchString))
                 {

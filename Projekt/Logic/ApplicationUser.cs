@@ -12,7 +12,7 @@ namespace Logic
     public class ApplicationUser : IdentityUser
     {
         public string TextAbout { get; set; }
-        public string invisibile { get; set; }
+        public bool invisibile { get; set; }
         public byte[] UserPhoto { get; set; }
         public string Alias { get; set; }
         public virtual ICollection<Post> posts { get; set; }

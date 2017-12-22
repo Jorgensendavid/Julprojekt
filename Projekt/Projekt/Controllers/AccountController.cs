@@ -166,7 +166,7 @@ namespace Projekt.Controllers
                             imageData = binary.ReadBytes(poImgFile.ContentLength);
                         }
                     }
-                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Alias = model.Alias, invisibile = model.Invisible };
+                    var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Alias = model.Alias, invisibile = model.Invisible};
 
                     //Here we pass the byte array to user context to store in db
                     user.UserPhoto = imageData;
