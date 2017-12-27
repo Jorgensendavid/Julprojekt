@@ -93,6 +93,10 @@ namespace Projekt.Models
         [Required]
         [Display(Name = "New name")]
         public string NewName { get; set; }
+
+        [Display(Name = "User Photo")]
+        public byte[] UserPhoto { get; set; }
     }
+
 
 }

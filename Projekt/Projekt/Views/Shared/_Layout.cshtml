@@ -21,9 +21,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Profile", "ProfileInfo", "User")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink(Projekt.Resources.HomeText.Profile, "ProfileInfo", "User")</li>
+                    <li>@Html.ActionLink(Projekt.Resources.HomeText.About, "About", "Home")</li>
+                    <li>@Html.ActionLink(Projekt.Resources.HomeText.Contact, "Contact", "Home")</li>
+                    <li>@Html.ActionLink(Projekt.Resources.HomeText.Language, "Language", "Language")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

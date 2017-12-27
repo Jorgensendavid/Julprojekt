@@ -63,5 +63,11 @@ namespace Projekt.Controllers
                 return null;
             }
         }
+        public FileContentResult UserPhotoOthers(string id)
+        {
+            var userID = userRepository.getUserId(id);
+            return new FileContentResult(userID.UserPhoto, "image/jpeg");
+        }
+
     }
 }

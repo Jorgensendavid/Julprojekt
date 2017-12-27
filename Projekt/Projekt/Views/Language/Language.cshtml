@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "Language";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Language</h2>
+
+<ul>
+    <li>@Html.ActionLink("English", "Change", "Language", new { LanguageAbbrevation = "en" }, null)</li>
+    <li>@Html.ActionLink("Svenska", "Change", "Language", new { LanguageAbbrevation = "sv" }, null)</li>
+    <li>@DateTime.Now.ToString()</li>
+
+</ul>
+ 

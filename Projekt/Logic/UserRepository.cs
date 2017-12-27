@@ -19,7 +19,7 @@ namespace Logic
         public ApplicationUser getUserId(string id)
         {
             var user = db.Users.Single(u => u.Id == id);
-            return user;
+            return user; 
         }
 
         public void edit(ApplicationUser user)
@@ -28,6 +28,7 @@ namespace Logic
 
             usr.TextAbout = user.TextAbout;
             usr.Alias = user.Alias;
+            usr.UserPhoto = user.UserPhoto;
             db.SaveChanges();
 
         }
