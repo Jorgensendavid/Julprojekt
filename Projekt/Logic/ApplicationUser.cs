@@ -16,6 +16,7 @@ namespace Logic
         public byte[] UserPhoto { get; set; }
         public string Alias { get; set; }
         public virtual ICollection<Post> posts { get; set; }
+        public virtual ICollection<Friend> friends { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType

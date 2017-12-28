@@ -82,5 +82,20 @@ namespace Projekt.Controllers
             };
             return View(watchProfiles);
         }
+
+        public ActionResult AddFriends(Friend friend, string id)
+        {
+            var userName = User.Identity.Name;
+            var user = db.Users.Single(x => x.UserName == userName);
+
+            friend.Receiver = user;
+
+            var toUser = db.Users.Single(x => x.Id == id);
+            friend.Requester = toUser;
+
+            db.SaveChanges();
+            return RedirectToAction("Index", new { id = id });
+
+        }
     }
 }

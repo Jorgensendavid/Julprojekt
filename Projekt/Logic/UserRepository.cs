@@ -40,12 +40,41 @@ namespace Logic
                 var randomUser = db.Users.OrderBy(x => Guid.NewGuid()).ToList();
 
                 list.Add(randomUser[0]);
-                list.Add(randomUser[1]);
+                //list.Add(randomUser[1]);
                 // list.Add(randomUser[2]);
 
                 return list;
             }
             return RandomUsers();
+        }
+
+        public void addFriends(ApplicationUser user, string id)
+        {
+            var usr = getUserName(user.UserName);
+            var userID = db.Users.Single(u => u.Id == id);
+
+            Friend friends = new Friend();
+            friends.Accepted = false;
+            friends.Requester = usr;
+            friends.Receiver = userID;
+
+            db.Friends.Add(friends);
+            db.SaveChanges();
+        }
+
+        public bool AlreadyFriends(ApplicationUser user, string id)
+        {
+            var usr = getUserName(user.UserName);
+            var userID = db.Users.Single(u => u.Id == id);
+            var AllFriends = db.Friends.ToList();
+            foreach (Friend friends in AllFriends)
+            {
+                if(friends.Requester == user && friends.Receiver == userID)
+                { return true; }
+                if(friends.Requester == userID && friends.Receiver == user)
+                    { return true; }
+            }
+            return false;
         }
     }
 }

@@ -18,6 +18,7 @@ namespace Logic
         }
 
         public DbSet<Post> Posts { get; set; }
+        public DbSet<Friend> Friends { get; set; }
     }
 
 }
