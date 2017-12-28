@@ -48,20 +48,6 @@ namespace Logic
             return RandomUsers();
         }
 
-        public void addFriends(ApplicationUser user, string id)
-        {
-            var usr = getUserName(user.UserName);
-            var userID = db.Users.Single(u => u.Id == id);
-
-            Friend friends = new Friend();
-            friends.Accepted = false;
-            friends.Requester = usr;
-            friends.Receiver = userID;
-
-            db.Friends.Add(friends);
-            db.SaveChanges();
-        }
-
         public bool AlreadyFriends(ApplicationUser user, string id)
         {
             var usr = getUserName(user.UserName);
