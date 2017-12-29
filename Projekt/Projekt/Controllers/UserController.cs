@@ -99,46 +99,68 @@ namespace Projekt.Controllers
 
         }
 
-        public ActionResult AcceptFriends(string id, Friend friended)
-        {
-            List<Friend> FriendList = new List<Friend>();
-            {
-                var allFriends = db.Friends.ToList();
-                foreach (Friend friends in allFriends)
-                {
-                    if(friends.Accepted == false)
-                    {
-                        FriendList.Add(friends);
-                    }
-                }
-            }
-            var user = db.Users.Single(x => x.Id == id);
+        //public ActionResult AcceptFriends(string id, Friend friended)
+        //{
 
-            var listOFFriends = new List<Friend>();
-            foreach (Friend friends in FriendList)
-            {
-                if (friends.Receiver == user)
-                    listOFFriends.Add(friends);
-            }
-            var UserList = db.Users.ToList();
-            var userName = User.Identity.Name;
-            var username = db.Users.Single(x => x.UserName == userName);
-            friended.Requester = username;
+        //    List<Friend> FriendList = new List<Friend>();
+        //    {
+        //        var allFriends = db.Friends.ToList();
+        //        foreach (Friend friends in allFriends)
+        //        {
+        //            if(friends.Accepted == false)
+        //            {
+        //                FriendList.Add(friends);
+        //            }
+        //        }
+        //    }
+        //    var user = db.Users.Single(x => x.Id == id);
+
+        //    var listOFFriends = new List<Friend>();
+        //    foreach (Friend friends in FriendList)
+        //    {
+        //        if (friends.Receiver == user)
+        //            listOFFriends.Add(friends);
+        //    }
+        //    var UserList = db.Users.ToList();
+        //    var userName = User.Identity.Name;
+        //    var username = db.Users.Single(x => x.UserName == userName);
+        //    friended.Requester = username;
             
 
-            var PotentialFriends = new List<ApplicationUser>();
-            foreach (ApplicationUser users in UserList)
-            {
-                foreach (Friend friend in listOFFriends)
-                {
+        //    var PotentialFriends = new List<ApplicationUser>();
+        //    foreach (ApplicationUser users in UserList)
+        //    {
+        //        foreach (Friend friend in listOFFriends)
+        //        {
 
-                    if(users.Id.Equals(username))
-                    {
-                        PotentialFriends.Add(users);
-                    }
-                }
-            }
-            return RedirectToAction("Index");
+        //            if(users.Id.Equals(username))
+        //            {
+        //                PotentialFriends.Add(users);
+        //            }
+        //        }
+        //    }
+        //    return RedirectToAction("Index");
+        //}
+        [Authorize]
+        public ActionResult ListPotentialFriends(string id)
+        {
+            var userName = User.Identity.Name;
+            var username = db.Users.Single(x => x.UserName == userName);
+           
+
+            var friends = db.Friends.Where(x => x.Receiver.Id == id).ToList();
+          
+            return View(new FriendViewModel {Friends = friends });
+
+
+            
+        }
+        public ActionResult MyfriendRequests(ApplicationUser model)
+        {
+            var findUser = from m in db.Users
+                         
+                           select m;
+            return View(findUser);
         }
     }
 }

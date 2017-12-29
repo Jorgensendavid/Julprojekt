@@ -9,6 +9,7 @@ namespace Logic
    public class UserRepository
     {
         ApplicationDbContext db = new ApplicationDbContext();
+
         
         public ApplicationUser getUserName(string userName)
         {
@@ -62,5 +63,7 @@ namespace Logic
             }
             return false;
         }
+
+
     }
 }

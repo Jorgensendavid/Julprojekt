@@ -1,0 +1,33 @@
+﻿@model Projekt.Models.FriendViewModel
+
+@{
+    ViewBag.Title = "ListPotentialFriends";
+}
+
+<h2>My Friend Request</h2>
+<h2>Index</h2>
+<table class="table">
+    <tr>
+        <th>
+
+        </th>
+        <th></th>
+    </tr>
+    @using (Html.BeginForm())
+    {
+
+    }
+
+    @foreach (var item in Model.Friends)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Requester.UserName)
+            </td>
+
+
+        </tr>
+    }
+
+</table>

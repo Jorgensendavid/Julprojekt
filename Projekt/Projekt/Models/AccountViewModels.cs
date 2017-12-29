@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Logic;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Projekt.Models
@@ -127,6 +128,12 @@ namespace Projekt.Models
         public string TextAbout { get; set; }
         public string Alias { get; set; }
         public string ProfileID { get; set; }
+    }
+
+    public class FriendViewModel
+    {
+        public string ID { get; set; }
+        public ICollection<Friend> Friends { get; set; }
     }
 
 }
