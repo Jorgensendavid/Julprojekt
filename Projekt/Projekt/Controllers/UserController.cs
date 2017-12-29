@@ -158,8 +158,7 @@ namespace Projekt.Controllers
         public ActionResult MyfriendRequests(ApplicationUser model)
         {
             var findUser = from m in db.Users
-                         
-                           select m;
+                             select m;
             return View(findUser);
         }
     }

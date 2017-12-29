@@ -7,6 +7,6 @@
 @foreach (var item in Model)
 {
 
-    @Html.ActionLink("Se dina vänförfrågningar", "ListPotentialFriends", "User", new { id = item.Id })
+    @Html.ActionLink("Se dina vänförfrågningar", "ListPotentialFriends", "User", new { id = item.Id }, new { })
 
 }
