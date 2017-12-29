@@ -157,9 +157,46 @@ namespace Projekt.Controllers
         }
         public ActionResult MyfriendRequests(ApplicationUser model)
         {
+            var userName = User.Identity.Name;
             var findUser = from m in db.Users
+                           where m.UserName.Equals(userName)
                              select m;
             return View(findUser);
         }
+
+        public ActionResult AcceptFriend(string id, Friend friend)
+        {
+
+            //Hämtar ALLA vänförfrågningar som inte ännu är accepterade
+            List<Friend> FriendsWithRequestPendingList = new List<Friend>();
+            {
+                var AllFriendConnections = db.Friends.ToList();
+                foreach (Friend friendconnection in AllFriendConnections)
+                {
+                    if (friendconnection.Accepted == false)
+                    {
+                        FriendsWithRequestPendingList.Add(friendconnection);
+                    }
+                }
+
+            }
+            //Hämtar ID på den som skickat vänförfrågan och den som mottagit den.
+            var userName = User.Identity.Name;
+
+           
+
+
+            //Ändrar den aktuella vänförfrågan till Ja (accepterad).
+            foreach (Friend notacceptedfriend in FriendsWithRequestPendingList)
+            {
+                if (notacceptedfriend.ID.ToString() ==id && notacceptedfriend.Receiver.UserName.Equals(userName))
+                {
+                    notacceptedfriend.Accepted = true;
+                }
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
+    
 }

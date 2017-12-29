@@ -20,14 +20,16 @@
 
     @foreach (var item in Model.Friends)
     {
-        <tr>
+    <tr>
 
-            <td>
-                @Html.DisplayFor(modelItem => item.Requester.UserName)
-            </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Requester.UserName)
+        </td>
 
-
-        </tr>
+        <td>
+            @Html.ActionLink("Accept Friend", "AcceptFriend", new { id = item.ID })
+        </td>
+    </tr>
     }
 
 </table>

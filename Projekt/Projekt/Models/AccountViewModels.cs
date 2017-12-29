@@ -134,6 +134,7 @@ namespace Projekt.Models
     {
         public string ID { get; set; }
         public ICollection<Friend> Friends { get; set; }
+        public bool Accepted { get; set; }
     }
 
 }
