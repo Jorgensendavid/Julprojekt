@@ -144,16 +144,32 @@ namespace Projekt.Controllers
         [Authorize]
         public ActionResult ListPotentialFriends(string id)
         {
-            var userName = User.Identity.Name;
-            var username = db.Users.Single(x => x.UserName == userName);
-           
 
-            var friends = db.Friends.Where(x => x.Receiver.Id == id).ToList();
-          
-            return View(new FriendViewModel {Friends = friends });
+            List<Friend> NewFriendsList = new List<Friend>();
+            {
+                var AllFriendConnections = db.Friends.ToList();
+                foreach (Friend friendconnection in AllFriendConnections)
+                {
+                    if (friendconnection.Accepted == false)
+                    {
+                        NewFriendsList.Add(friendconnection);
+                    }
+                }
 
-
+            }
             
+            //Skapar USER-objekt av dom aktuella vänförfrågningarna och skickar med till en list-view
+         
+            //var userName = User.Identity.Name;
+            //var username = db.Users.Single(x => x.UserName == userName);
+
+
+            //var friends = db.Friends.Where(x => x.Receiver.Id == id).ToList();
+
+            //return View(new FriendViewModel {Friends = friends });
+            return View(new FriendViewModel { Friends = NewFriendsList });
+
+
         }
         public ActionResult MyfriendRequests(ApplicationUser model)
         {
@@ -187,7 +203,7 @@ namespace Projekt.Controllers
 
 
             //Ändrar den aktuella vänförfrågan till Ja (accepterad).
-            foreach (Friend notacceptedfriend in FriendsWithRequestPendingList)
+             foreach (Friend notacceptedfriend in FriendsWithRequestPendingList)
             {
                 if (notacceptedfriend.ID.ToString() ==id && notacceptedfriend.Receiver.UserName.Equals(userName))
                 {
