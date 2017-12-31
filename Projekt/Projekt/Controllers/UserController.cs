@@ -99,48 +99,7 @@ namespace Projekt.Controllers
 
         }
 
-        //public ActionResult AcceptFriends(string id, Friend friended)
-        //{
-
-        //    List<Friend> FriendList = new List<Friend>();
-        //    {
-        //        var allFriends = db.Friends.ToList();
-        //        foreach (Friend friends in allFriends)
-        //        {
-        //            if(friends.Accepted == false)
-        //            {
-        //                FriendList.Add(friends);
-        //            }
-        //        }
-        //    }
-        //    var user = db.Users.Single(x => x.Id == id);
-
-        //    var listOFFriends = new List<Friend>();
-        //    foreach (Friend friends in FriendList)
-        //    {
-        //        if (friends.Receiver == user)
-        //            listOFFriends.Add(friends);
-        //    }
-        //    var UserList = db.Users.ToList();
-        //    var userName = User.Identity.Name;
-        //    var username = db.Users.Single(x => x.UserName == userName);
-        //    friended.Requester = username;
-            
-
-        //    var PotentialFriends = new List<ApplicationUser>();
-        //    foreach (ApplicationUser users in UserList)
-        //    {
-        //        foreach (Friend friend in listOFFriends)
-        //        {
-
-        //            if(users.Id.Equals(username))
-        //            {
-        //                PotentialFriends.Add(users);
-        //            }
-        //        }
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+       
         [Authorize]
         public ActionResult ListPotentialFriends(string id)
         {
@@ -171,6 +130,47 @@ namespace Projekt.Controllers
 
 
         }
+        [Authorize]
+        public ActionResult Friends()
+        {
+
+            //hämtar aktuella användaren
+            //hämtar alla vänkombinationer
+            var userName = User.Identity.Name;
+            var user = db.Users.Single(x => x.UserName == userName);
+
+            var AllFriendConnections = db.Friends.ToList();
+            //skapar en tom lista för alla accepterade vänner
+            var AcceptedFriendsList = new List<Friend>();
+            //lägger till alla accepterade i listan
+            foreach (Friend friend in AllFriendConnections)
+            {
+                if (friend.Accepted == true)
+                {
+                    AcceptedFriendsList.Add(friend);
+                }
+            }
+            //skapar en tom lista för att hålla user-objekt med accepterade vänner
+            var MyAcceptedFriendsAsUsers = new List<ApplicationUser>();
+            //skapar en lista med alla users
+            var UserList = db.Users.ToList();
+
+            foreach (ApplicationUser appuser in UserList)
+            {
+                //Fyller på listan med den inloggades accepterade vänner.
+                foreach (Friend friend in AcceptedFriendsList)
+                {
+                    if (( user == friend.Receiver && appuser.Id.Equals(friend.Requester.Id) || user == friend.Requester && appuser.Id.Equals(friend.Receiver.Id)))
+                    {
+                        MyAcceptedFriendsAsUsers.Add(appuser);
+                    }
+                }
+            }
+            return View(MyAcceptedFriendsAsUsers);
+        }
+
+
+
         public ActionResult MyfriendRequests(ApplicationUser model)
         {
             var userName = User.Identity.Name;

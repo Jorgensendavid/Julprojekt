@@ -1,0 +1,38 @@
+﻿@model IEnumerable<Logic.ApplicationUser>
+
+@{
+    ViewBag.Title = "Friends";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Mina vänner</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Alias)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alias)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+
+            <td>
+                @Html.ActionLink("Gå till profil", "OthersProfileInfo", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("Visa vänförfrågningar", "ListPotentialFriends")
