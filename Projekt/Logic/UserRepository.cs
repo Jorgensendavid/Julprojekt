@@ -41,8 +41,8 @@ namespace Logic
                 var randomUser = db.Users.OrderBy(x => Guid.NewGuid()).ToList();
 
                 list.Add(randomUser[0]);
-                //list.Add(randomUser[1]);
-                // list.Add(randomUser[2]);
+                list.Add(randomUser[1]);
+                list.Add(randomUser[2]);
 
                 return list;
             }

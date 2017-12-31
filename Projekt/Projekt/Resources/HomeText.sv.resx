@@ -120,8 +120,8 @@
   <data name="About" xml:space="preserve">
     <value>Om Mig</value>
   </data>
-  <data name="Contact" xml:space="preserve">
-    <value>Kontakt</value>
+  <data name="Friends" xml:space="preserve">
+    <value>Vänner</value>
   </data>
   <data name="Language" xml:space="preserve">
     <value>Språk</value>

@@ -12,9 +12,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Alias)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
+        
 
     </tr>
 
@@ -24,9 +22,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Alias)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
+           
 
             <td>
                 @Html.ActionLink("Gå till profil", "OthersProfileInfo", new { id = item.Id })

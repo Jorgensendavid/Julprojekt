@@ -70,11 +70,11 @@ namespace Projekt.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contact.
+        ///   Looks up a localized string similar to Friends.
         /// </summary>
-        public static string Contact {
+        public static string Friends {
             get {
-                return ResourceManager.GetString("Contact", resourceCulture);
+                return ResourceManager.GetString("Friends", resourceCulture);
             }
         }
         

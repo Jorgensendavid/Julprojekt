@@ -20,19 +20,19 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Alias)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            
-           
-            <td>
-                @Html.ActionLink("Acceptera vänförfrågan", "Index", new { id = item.Id })
-            </td>
-        </tr>
-    }
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alias)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        
 
+        <td>
+            @Html.ActionLink("Acceptera vänförfrågan", "Index", new { id = item.Id })
+        </td>
+    </tr>
+    }
+    
 </table>
