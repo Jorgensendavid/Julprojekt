@@ -48,7 +48,6 @@ namespace Projekt.Controllers
                 }
             }
 
-            //Here we pass the byte array to user context to store in db
             ApplicationUser applicationUser = new ApplicationUser();
 
             var userName = User.Identity.Name;
@@ -106,53 +105,35 @@ namespace Projekt.Controllers
 
             List<Friend> NewFriendsList = new List<Friend>();
             {
-                var AllFriendConnections = db.Friends.ToList();
-                foreach (Friend friendconnection in AllFriendConnections)
+                var AllFriends = db.Friends.ToList();
+                foreach (Friend friends in AllFriends)
                 {
-                    if (friendconnection.Accepted == false)
+                    if (friends.Accepted == false)
                     {
-                        NewFriendsList.Add(friendconnection);
+                        NewFriendsList.Add(friends);
                     }
                 }
 
             }
-            
-            //Skapar USER-objekt av dom aktuella vänförfrågningarna och skickar med till en list-view
-         
-            //var userName = User.Identity.Name;
-            //var username = db.Users.Single(x => x.UserName == userName);
-
-
-            //var friends = db.Friends.Where(x => x.Receiver.Id == id).ToList();
-
-            //return View(new FriendViewModel {Friends = friends });
+          
             return View(new FriendViewModel { Friends = NewFriendsList });
-
-
         }
         [Authorize]
         public ActionResult Friends()
         {
-
-            //hämtar aktuella användaren
-            //hämtar alla vänkombinationer
             var userName = User.Identity.Name;
             var user = db.Users.Single(x => x.UserName == userName);
 
-            var AllFriendConnections = db.Friends.ToList();
-            //skapar en tom lista för alla accepterade vänner
+            var AllFriends = db.Friends.ToList();
             var AcceptedFriendsList = new List<Friend>();
-            //lägger till alla accepterade i listan
-            foreach (Friend friend in AllFriendConnections)
+            foreach (Friend friend in AllFriends)
             {
                 if (friend.Accepted == true)
                 {
                     AcceptedFriendsList.Add(friend);
                 }
             }
-            //skapar en tom lista för att hålla user-objekt med accepterade vänner
-            var MyAcceptedFriendsAsUsers = new List<ApplicationUser>();
-            //skapar en lista med alla users
+            var MyAcceptedFriends = new List<ApplicationUser>();
             var UserList = db.Users.ToList();
 
             foreach (ApplicationUser appuser in UserList)
@@ -162,11 +143,11 @@ namespace Projekt.Controllers
                 {
                     if (( user == friend.Receiver && appuser.Id.Equals(friend.Requester.Id) || user == friend.Requester && appuser.Id.Equals(friend.Receiver.Id)))
                     {
-                        MyAcceptedFriendsAsUsers.Add(appuser);
+                        MyAcceptedFriends.Add(appuser);
                     }
                 }
             }
-            return View(MyAcceptedFriendsAsUsers);
+            return View(MyAcceptedFriends);
         }
 
 
