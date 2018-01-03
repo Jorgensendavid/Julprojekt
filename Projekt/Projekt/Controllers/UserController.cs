@@ -151,7 +151,7 @@ namespace Projekt.Controllers
 
        
         [Authorize]
-        public ActionResult ListPotentialFriends(string id)
+        public ActionResult ListPotentialFriends()
         {
 
             List<Friend> NewFriendsList = new List<Friend>();
