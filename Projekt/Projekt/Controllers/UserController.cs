@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 
 namespace Projekt.Controllers
 {
@@ -65,6 +66,31 @@ namespace Projekt.Controllers
 
             model.Alias = user.Alias;
             model.TextAbout = user.TextAbout;
+
+            var userName = User.Identity.Name;
+            var sender1 = db.Users.Single(x => x.UserName == userName);
+            var listOfPosts = new PostsController().GetRelevantPosts(sender1.Id);
+           
+            var namnOchContentList = new List<string[]>();
+            if (listOfPosts.Count > 0)
+            {
+                foreach (Post post in listOfPosts)
+                {
+                    ApplicationUser sender = db.Users.Find(post.From);
+                    string namn = sender.Alias;
+                    string[] namnOchContentArray = new string[2] { namn, post.Text };
+                    namnOchContentList.Add(namnOchContentArray);
+                }
+            }
+            else
+            {
+                string[] namnOchContentArray = new string[2] { "Du har inga inlägg", "Synd för dig" };
+                namnOchContentList.Add(namnOchContentArray);
+            }
+            ViewBag.Sender = sender1.Id;
+
+            ViewBag.list = namnOchContentList;
+
             return View(model);
         }
         
@@ -79,6 +105,32 @@ namespace Projekt.Controllers
                 TextAbout = user.TextAbout,
                 ProfileID = id,               
             };
+
+            var userid = db.Users.Single(x => x.Id == id);
+
+            var listOfPosts = new PostsController().GetRelevantPosts(userid.Id);
+
+            var namnOchContentList = new List<string[]>();
+            if (listOfPosts.Count > 0)
+            {
+                foreach (Post post in listOfPosts)
+                {
+                    ApplicationUser sender = db.Users.Find(post.From);
+                    string namn = sender.Alias;
+                    string[] namnOchContentArray = new string[2] { namn, post.Text };
+                    namnOchContentList.Add(namnOchContentArray);
+                }
+            }
+            else
+            {
+                string[] namnOchContentArray = new string[2] { "Du har inga inlägg", "Synd för dig" };
+                namnOchContentList.Add(namnOchContentArray);
+            }
+            var userName = User.Identity.Name;
+            var sender1 = db.Users.Single(x => x.UserName == userName);
+            ViewBag.Sender = sender1.Id;
+            ViewBag.list = namnOchContentList;
+            ViewBag.profilID = userid.Id;
             return View(watchProfiles);
         }
 
@@ -180,9 +232,6 @@ namespace Projekt.Controllers
             //Hämtar ID på den som skickat vänförfrågan och den som mottagit den.
             var userName = User.Identity.Name;
 
-           
-
-
             //Ändrar den aktuella vänförfrågan till Ja (accepterad).
              foreach (Friend notacceptedfriend in FriendsWithRequestPendingList)
             {
@@ -193,6 +242,19 @@ namespace Projekt.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        public bool AlreadyFriends(ApplicationUser user, string id)
+        {
+            var userID = db.Users.Single(u => u.Id == id);
+            var AllFriends = db.Friends.ToList();
+            foreach (Friend friends in AllFriends)
+            {
+                if (friends.Requester == user && friends.Receiver == userID)
+                { return true; }
+                if (friends.Requester == userID && friends.Receiver == user)
+                { return true; }
+            }
+            return false;
         }
     }
     

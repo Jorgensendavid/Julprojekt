@@ -137,4 +137,10 @@ namespace Projekt.Models
         public bool Accepted { get; set; }
     }
 
+    public class PostViewModel
+    {
+        public string FromID { get; set; }
+        public string ToID { get; set; }
+        public string Text { get; set; }
+    }
 }

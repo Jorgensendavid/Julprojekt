@@ -1,7 +1,4 @@
 ﻿
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,10 +27,12 @@
                     <li>@Html.ActionLink(Projekt.Resources.HomeText.Friends, "Friends", "User")</li>
                     <li>@Html.ActionLink(Projekt.Resources.HomeText.Language, "Language", "Language")</li>
 
-                    
-                        
 
-                    
+       
+                <li>   @Html.ActionLink("Friend Requests", "MyfriendRequests", "User")</li>
+
+
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

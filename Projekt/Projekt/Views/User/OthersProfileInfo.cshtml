@@ -2,9 +2,33 @@
 
 @{
     ViewBag.Title = "About";
+    var Sender = ViewBag.Sender;
+    
+    var Reciever = ViewBag.profilID;
+
 
 }
 
+<script>
+    //Skickar JSON-data till API-Controllern för att lägga till en post.
+    function addPost() {
+        var Text = $('#Text').val();
+        var Sender = '@Sender';
+        var Reciever = '@Reciever';
+        var newPost = {FromID: Sender, ToID: Reciever, Text: Text};
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("addPost","Posts", new { httproute = "" })',
+                data: JSON.stringify(newPost),
+                contentType:'application/json',
+                datatype: 'json',
+                success: function (data) {
+                    $('#Text').val('');
+                    location.reload();
+                }
+            })
+        };
+</script>
 
 <h1>
     @Html.DisplayFor(model => model.Alias)
@@ -47,3 +71,27 @@
 </div>
 
 @Html.ActionLink("Lägg till " + Model.Alias + " som vän", "AddFriends", "User", new { id = Model.ProfileID},null )
+
+
+<div class="wallcontainer">
+    <div class="walldiv">
+        Skriv ett inlägg:
+        <br />
+        <textarea id="Text" rows="3" cols="500"></textarea><br />
+        <input id="Button1" type="button" value="Skicka inlägg" onclick="addPost()" />
+    </div>
+    <br />
+    <div class="walldiv">
+        Inlägg:
+        <ul>
+            @foreach (var post in ViewBag.list)
+            {
+                <li>
+                    <B>@post[0]</B>
+                    <br />
+                    @post[1]
+                </li>
+            }
+        </ul>
+    </div>
+</div>
