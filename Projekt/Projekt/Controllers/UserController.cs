@@ -76,7 +76,7 @@ namespace Projekt.Controllers
             {
                 foreach (Post post in listOfPosts)
                 {
-                    ApplicationUser sender = db.Users.Find(post.From);
+                    ApplicationUser sender = db.Users.Find(post.From.Id);
                     string namn = sender.Alias;
                     string[] namnOchContentArray = new string[2] { namn, post.Text };
                     namnOchContentList.Add(namnOchContentArray);
@@ -87,7 +87,6 @@ namespace Projekt.Controllers
                 string[] namnOchContentArray = new string[2] { "Du har inga inlägg", "Synd för dig" };
                 namnOchContentList.Add(namnOchContentArray);
             }
-            ViewBag.Sender = sender1.Id;
 
             ViewBag.list = namnOchContentList;
 
@@ -115,7 +114,7 @@ namespace Projekt.Controllers
             {
                 foreach (Post post in listOfPosts)
                 {
-                    ApplicationUser sender = db.Users.Find(post.From);
+                    ApplicationUser sender = db.Users.Find(post.From.Id);
                     string namn = sender.Alias;
                     string[] namnOchContentArray = new string[2] { namn, post.Text };
                     namnOchContentList.Add(namnOchContentArray);
