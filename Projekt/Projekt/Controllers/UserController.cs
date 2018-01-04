@@ -85,7 +85,7 @@ namespace Projekt.Controllers
             }
             else
             {
-                string[] postArray = new string[2] { "Du har inga inlägg", "Synd för dig" };
+                string[] postArray = new string[2] { "You have no Posts yet", "" };
                 postList.Add(postArray);
             }
 
@@ -123,7 +123,7 @@ namespace Projekt.Controllers
             }
             else
             {
-                string[] textArray = new string[2] { "Du har inga inlägg", "Synd för dig" };
+                string[] textArray = new string[2] { "You have no Posts yet", "" };
                 postList.Add(textArray);
             }
 
@@ -155,7 +155,7 @@ namespace Projekt.Controllers
             db.Friends.Add(friend);
 
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("OthersProfileInfo", new { Id = id});
 
         }
 
@@ -239,7 +239,7 @@ namespace Projekt.Controllers
                 }
             }
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("ListPotentialFriends");
         }
         public bool AlreadyFriends(string id1, string id2)
         {
