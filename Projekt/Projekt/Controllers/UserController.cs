@@ -58,7 +58,7 @@ namespace Projekt.Controllers
             applicationUser.TextAbout = model.About;
             applicationUser.Age = model.Age;
             userRepository.edit(applicationUser);
-            return RedirectToAction("Index");
+            return RedirectToAction("ProfileInfo");
         }
         [Authorize]
         public ActionResult ProfileInfo(ProfileViewModel model)

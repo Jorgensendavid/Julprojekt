@@ -36,7 +36,7 @@ namespace Projekt.Controllers
             return View();
         }
 
-        public ActionResult UserPhotos()
+        public FileContentResult UserPhotos()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -59,7 +59,7 @@ namespace Projekt.Controllers
                 // to get the user details to load user Image
                 var bdUsers = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
                 var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
-                return Redirect("~/Images/noImg.png");
+              
                 return new FileContentResult(userImage.UserPhoto, "image/jpeg");
             }
             else
