@@ -13,9 +13,21 @@ namespace Projekt.Controllers
     public class HomeController : Controller
     {
         UserRepository userRepository = new UserRepository();
+        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            return View(userRepository.StartUsers());
+            if (User.Identity.Name == "")
+            {
+                return View(userRepository.StartUsers());
+            }
+            else {
+                var userName = User.Identity.Name;
+                var sender1 = db.Users.Single(x => x.UserName == userName);
+                var listOfFriends = new FriendController().GetFriendRequest(sender1.Id);
+                ViewBag.listOfFriends = listOfFriends.Count;
+                return View(userRepository.StartUsers());
+
+            }
         }
 
         public ActionResult About()

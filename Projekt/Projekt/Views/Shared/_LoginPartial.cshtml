@@ -10,7 +10,7 @@
     <li>
         @Html.ActionLink("Post Fun stuff", "Index", "User")
     </li>
-  
+    <li>   @Html.ActionLink("Friend Requests", "ListPotentialFriends", "User") @ViewBag.listOfFriends</li>
         <li>
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>

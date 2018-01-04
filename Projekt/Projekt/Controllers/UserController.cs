@@ -125,11 +125,20 @@ namespace Projekt.Controllers
                 string[] namnOchContentArray = new string[2] { "Du har inga inlägg", "Synd för dig" };
                 namnOchContentList.Add(namnOchContentArray);
             }
+
+          
             var userName = User.Identity.Name;
             var sender1 = db.Users.Single(x => x.UserName == userName);
             ViewBag.Sender = sender1.Id;
             ViewBag.list = namnOchContentList;
             ViewBag.profilID = userid.Id;
+
+            ViewBag.AlreadyFriends = false;
+            if (AlreadyFriends(sender1.Id, userid.Id))
+            {
+                ViewBag.AlreadyFriends = true;
+            }
+
             return View(watchProfiles);
         }
 
@@ -156,10 +165,13 @@ namespace Projekt.Controllers
 
             List<Friend> NewFriendsList = new List<Friend>();
             {
+                var user = User.Identity.Name;
+                var userName = db.Users.Single(x => x.UserName == user);
+
                 var AllFriends = db.Friends.ToList();
                 foreach (Friend friends in AllFriends)
                 {
-                    if (friends.Accepted == false)
+                    if (friends.Accepted == false && friends.Requester != userName)
                     {
                         NewFriendsList.Add(friends);
                     }
@@ -202,16 +214,6 @@ namespace Projekt.Controllers
         }
 
 
-
-        public ActionResult MyfriendRequests(ApplicationUser model)
-        {
-            var userName = User.Identity.Name;
-            var findUser = from m in db.Users
-                           where m.UserName.Equals(userName)
-                             select m;
-            return View(findUser);
-        }
-
         public ActionResult AcceptFriend(string id, Friend friend)
         {
 
@@ -242,15 +244,15 @@ namespace Projekt.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-        public bool AlreadyFriends(ApplicationUser user, string id)
+        public bool AlreadyFriends(string id1, string id2)
         {
-            var userID = db.Users.Single(u => u.Id == id);
+            var userID = db.Users.Single(u => u.Id == id1);
             var AllFriends = db.Friends.ToList();
             foreach (Friend friends in AllFriends)
             {
-                if (friends.Requester == user && friends.Receiver == userID)
+                if (friends.Requester.Id == id2 && friends.Receiver == userID)
                 { return true; }
-                if (friends.Requester == userID && friends.Receiver == user)
+                if (friends.Requester == userID && friends.Receiver.Id == id2)
                 { return true; }
             }
             return false;

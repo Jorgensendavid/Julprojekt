@@ -3,8 +3,9 @@
 @{
     ViewBag.Title = "About";
     var Sender = ViewBag.Sender;
-    
+
     var Reciever = ViewBag.profilID;
+    bool alreadyfriends = ViewBag.AlreadyFriends;
 
 
 }
@@ -69,9 +70,10 @@
         </div>
     </div>
 </div>
-
-@Html.ActionLink("Lägg till " + Model.Alias + " som vän", "AddFriends", "User", new { id = Model.ProfileID},null )
-
+@if (!alreadyfriends)
+{
+@Html.ActionLink("Lägg till " + Model.Alias + " som vän", "AddFriends", "User", new { id = Model.ProfileID }, null)
+}
 
 <div class="wallcontainer">
     <div class="walldiv">

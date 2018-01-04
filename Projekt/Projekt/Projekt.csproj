@@ -206,6 +206,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -264,8 +265,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
@@ -296,7 +295,6 @@
     <Content Include="Views\Language\Language.cshtml" />
     <Content Include="Views\User\AcceptFriends.cshtml" />
     <Content Include="Views\User\ListPotentialFriends.cshtml" />
-    <Content Include="Views\User\MyfriendRequests.cshtml" />
     <Content Include="Views\User\Friends.cshtml" />
   </ItemGroup>
   <ItemGroup>
