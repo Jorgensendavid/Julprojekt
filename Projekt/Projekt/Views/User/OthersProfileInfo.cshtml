@@ -57,7 +57,15 @@
             <span class="pull-left"><strong class="">Role: </strong></span> Pet Sitter
 
         </li>
+        
     </ul>
+
+    <span class="pull-left"><strong class="">
+    @if (!alreadyfriends)
+    {
+        @Html.ActionLink("Lägg till " + Model.Alias + " som vän", "AddFriends", "User", new { id = Model.ProfileID }, null)
+    }
+</strong></span>
 </div>
 
 
@@ -70,30 +78,41 @@
         </div>
     </div>
 </div>
-@if (!alreadyfriends)
-{
-@Html.ActionLink("Lägg till " + Model.Alias + " som vän", "AddFriends", "User", new { id = Model.ProfileID }, null)
-}
 
-<div class="wallcontainer">
-    <div class="walldiv">
-        Skriv ett inlägg:
-        <br />
-        <textarea id="Text" rows="3" cols="500"></textarea><br />
-        <input id="Button1" type="button" value="Skicka inlägg" onclick="addPost()" />
-    </div>
-    <br />
-    <div class="walldiv">
-        Inlägg:
-        <ul>
-            @foreach (var post in ViewBag.list)
-            {
-                <li>
-                    <B>@post[0]</B>
-                    <br />
-                    @post[1]
-                </li>
-            }
-        </ul>
+
+<div class="col-sm-9" style="" contenteditable="false">
+    <div class="panel panel-default">
+        <div class="panel-heading">Send Post</div>
+        <div class="panel-body">
+            <textarea id="Text" rows="3" cols="500"></textarea><br />
+            <button type="button" class="btn btn-default" onclick="addPost()">Send Post</button>
+           
+
+        </div>
     </div>
 </div>
+
+
+<div class="col-sm-9" style="" contenteditable="false">
+    <div class="panel panel-default">
+        <div class="panel-heading">My Posts</div>
+        <div class="panel-body">
+
+            <ul>
+                @foreach (var post in ViewBag.list)
+        {
+            <li>
+                <B>@post[0]</B>
+                <br />
+                @post[1]
+            </li>
+}
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+
+
+

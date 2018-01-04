@@ -55,19 +55,25 @@
         @Html.ActionLink("Edit Profile", "editProfile", "User")<span class="pull-left"></span>
     </p>
 </div>
-
-
-    <div class="walldiv">
-        Inlägg:
-        <ul>
-            @foreach (var post in ViewBag.list)
-            {
-                <li>
-                    <B>@post[0]</B>
-                    <br />
-                    @post[1]
-                </li>
-            }
-        </ul>
+<div class="col-sm-9" style="" contenteditable="false">
+    <div class="panel panel-default">
+        <div class="panel-heading">My Posts</div>
+        <div class="panel-body">
+           
+            <ul>
+                @foreach (var post in ViewBag.list)
+        {
+            <li>
+                <B>@post[0]</B>
+                <br />
+                @post[1]
+            </li>
+}
+            </ul>
+        </div>
     </div>
+</div>
+
+
+  
 

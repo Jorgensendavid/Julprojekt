@@ -56,6 +56,7 @@ namespace Projekt.Controllers
             applicationUser.UserPhoto = imageData;
             applicationUser.Alias = model.NewName;
             applicationUser.TextAbout = model.About;
+            applicationUser.Age = model.Age;
             userRepository.edit(applicationUser);
             return RedirectToAction("Index");
         }
@@ -171,7 +172,7 @@ namespace Projekt.Controllers
                 var AllFriends = db.Friends.ToList();
                 foreach (Friend friends in AllFriends)
                 {
-                    if (friends.Accepted == false && friends.Requester != userName)
+                    if (friends.Accepted == false && friends.Requester != userName && friends.Receiver == userName)
                     {
                         NewFriendsList.Add(friends);
                     }

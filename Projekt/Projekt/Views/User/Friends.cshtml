@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Mina vänner</h2>
+<h2>My Friends</h2>
 
 <table class="table">
     <tr>
@@ -25,10 +25,10 @@
            
 
             <td>
-                @Html.ActionLink("Gå till profil", "OthersProfileInfo", new { id = item.Id })
+                @Html.ActionLink("Profile", "OthersProfileInfo", new { id = item.Id })
             </td>
         </tr>
     }
 
 </table>
-@Html.ActionLink("Visa vänförfrågningar", "ListPotentialFriends")
+@Html.ActionLink("Show Friend Requests", "ListPotentialFriends")

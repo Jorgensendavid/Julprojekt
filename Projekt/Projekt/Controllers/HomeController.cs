@@ -16,18 +16,10 @@ namespace Projekt.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
         {
-            if (User.Identity.Name == "")
-            {
+            
                 return View(userRepository.StartUsers());
-            }
-            else {
-                var userName = User.Identity.Name;
-                var sender1 = db.Users.Single(x => x.UserName == userName);
-                var listOfFriends = new FriendController().GetFriendRequest(sender1.Id);
-                ViewBag.listOfFriends = listOfFriends.Count;
-                return View(userRepository.StartUsers());
-
-            }
+            
+           
         }
 
         public ActionResult About()
@@ -44,7 +36,7 @@ namespace Projekt.Controllers
             return View();
         }
 
-        public FileContentResult UserPhotos()
+        public ActionResult UserPhotos()
         {
             if (User.Identity.IsAuthenticated)
             {
@@ -67,7 +59,7 @@ namespace Projekt.Controllers
                 // to get the user details to load user Image
                 var bdUsers = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
                 var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
-
+                return Redirect("~/Images/noImg.png");
                 return new FileContentResult(userImage.UserPhoto, "image/jpeg");
             }
             else

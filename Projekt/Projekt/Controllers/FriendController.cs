@@ -16,5 +16,12 @@ namespace Projekt.Controllers
 
             return Friends;
         }
+
+        public void getUser()
+        {
+            var userName = User.Identity.Name;
+            var sender1 = db.Users.Single(x => x.UserName == userName);
+            var listOfFriends = new FriendController().GetFriendRequest(sender1.Id);
+        }
     }
 }
