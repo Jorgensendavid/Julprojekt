@@ -23,14 +23,12 @@ namespace Projekt.Controllers
             return db.Posts;
         }
 
-        //Hämtar alla posts som ska visas på användarens profil (via ID).
         public List<Post> GetRelevantPosts(string id)
         {
             List<Post> Posts = db.Posts.Where(x => x.To.Id == id).ToList();
             
             return Posts;
         }
-        //Lägger till en post i databasen.
         [HttpPost, ActionName("addPost")]
         public void addPost([FromBody] PostViewModel model)
         {

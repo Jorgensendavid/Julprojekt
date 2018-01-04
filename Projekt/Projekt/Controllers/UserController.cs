@@ -71,24 +71,24 @@ namespace Projekt.Controllers
             var sender1 = db.Users.Single(x => x.UserName == userName);
             var listOfPosts = new PostsController().GetRelevantPosts(sender1.Id);
            
-            var namnOchContentList = new List<string[]>();
+            var postList = new List<string[]>();
             if (listOfPosts.Count > 0)
             {
                 foreach (Post post in listOfPosts)
                 {
                     ApplicationUser sender = db.Users.Find(post.From.Id);
-                    string namn = sender.Alias;
-                    string[] namnOchContentArray = new string[2] { namn, post.Text };
-                    namnOchContentList.Add(namnOchContentArray);
+                    string name = sender.Alias;
+                    string[] postArray = new string[2] { name, post.Text };
+                    postList.Add(postArray);
                 }
             }
             else
             {
-                string[] namnOchContentArray = new string[2] { "Du har inga inlägg", "Synd för dig" };
-                namnOchContentList.Add(namnOchContentArray);
+                string[] postArray = new string[2] { "Du har inga inlägg", "Synd för dig" };
+                postList.Add(postArray);
             }
 
-            ViewBag.list = namnOchContentList;
+            ViewBag.list = postList;
 
             return View(model);
         }
@@ -109,28 +109,28 @@ namespace Projekt.Controllers
 
             var listOfPosts = new PostsController().GetRelevantPosts(userid.Id);
 
-            var namnOchContentList = new List<string[]>();
+            var postList = new List<string[]>();
             if (listOfPosts.Count > 0)
             {
                 foreach (Post post in listOfPosts)
                 {
                     ApplicationUser sender = db.Users.Find(post.From.Id);
-                    string namn = sender.Alias;
-                    string[] namnOchContentArray = new string[2] { namn, post.Text };
-                    namnOchContentList.Add(namnOchContentArray);
+                    string name = sender.Alias;
+                    string[] textArray = new string[2] { name, post.Text };
+                    postList.Add(textArray);
                 }
             }
             else
             {
-                string[] namnOchContentArray = new string[2] { "Du har inga inlägg", "Synd för dig" };
-                namnOchContentList.Add(namnOchContentArray);
+                string[] textArray = new string[2] { "Du har inga inlägg", "Synd för dig" };
+                postList.Add(textArray);
             }
 
           
             var userName = User.Identity.Name;
             var sender1 = db.Users.Single(x => x.UserName == userName);
             ViewBag.Sender = sender1.Id;
-            ViewBag.list = namnOchContentList;
+            ViewBag.list = postList;
             ViewBag.profilID = userid.Id;
 
             ViewBag.AlreadyFriends = false;
@@ -201,7 +201,6 @@ namespace Projekt.Controllers
 
             foreach (ApplicationUser appuser in UserList)
             {
-                //Fyller på listan med den inloggades accepterade vänner.
                 foreach (Friend friend in AcceptedFriendsList)
                 {
                     if (( user == friend.Receiver && appuser.Id.Equals(friend.Requester.Id) || user == friend.Requester && appuser.Id.Equals(friend.Receiver.Id)))
@@ -217,23 +216,20 @@ namespace Projekt.Controllers
         public ActionResult AcceptFriend(string id, Friend friend)
         {
 
-            //Hämtar ALLA vänförfrågningar som inte ännu är accepterade
             List<Friend> FriendsWithRequestPendingList = new List<Friend>();
             {
-                var AllFriendConnections = db.Friends.ToList();
-                foreach (Friend friendconnection in AllFriendConnections)
+                var allFriends = db.Friends.ToList();
+                foreach (Friend friends in allFriends)
                 {
-                    if (friendconnection.Accepted == false)
+                    if (friends.Accepted == false)
                     {
-                        FriendsWithRequestPendingList.Add(friendconnection);
+                        FriendsWithRequestPendingList.Add(friends);
                     }
                 }
 
             }
-            //Hämtar ID på den som skickat vänförfrågan och den som mottagit den.
             var userName = User.Identity.Name;
 
-            //Ändrar den aktuella vänförfrågan till Ja (accepterad).
              foreach (Friend notacceptedfriend in FriendsWithRequestPendingList)
             {
                 if (notacceptedfriend.ID.ToString() ==id && notacceptedfriend.Receiver.UserName.Equals(userName))
