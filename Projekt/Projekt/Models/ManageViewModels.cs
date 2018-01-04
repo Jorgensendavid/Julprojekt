@@ -87,10 +87,12 @@ namespace Projekt.Models
     public class editProfileViewModel
     {
         [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "Information about you")]
         public string About { get; set; }
 
         [Required]
+        [DataType(DataType.Text)]
         [Display(Name = "New name")]
         public string NewName { get; set; }
 
@@ -98,7 +100,6 @@ namespace Projekt.Models
         [Display(Name = "Age")]
         public int Age { get; set; }
 
-        [Required]
         [Display(Name = "User Photo")]
         public byte[] UserPhoto { get; set; }
 

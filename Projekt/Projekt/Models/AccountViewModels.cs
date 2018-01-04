@@ -80,9 +80,18 @@ namespace Projekt.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [Display(Name = "Name")]
         public string Alias { get; set; }
+
+        [Required]
+        [DataType(DataType.ImageUrl)]
         [Display(Name = "Userphoto")]
         public byte[] UserPhoto { get; set; }
+
+
         [Display(Name = "Invisible?")]
         public bool Invisible { get; set; }
 

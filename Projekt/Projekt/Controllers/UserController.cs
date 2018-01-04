@@ -38,29 +38,37 @@ namespace Projekt.Controllers
         [HttpPost]
         public ActionResult editProfile([Bind(Exclude = "UserPhoto")]editProfileViewModel model)
         {
-            byte[] imageData = null;
-            if (Request.Files.Count > 0)
+            if (ModelState.IsValid)
             {
-                HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
-
-                using (var binary = new BinaryReader(poImgFile.InputStream))
+                byte[] imageData = null;
+                if (Request.Files.Count > 0)
                 {
-                    imageData = binary.ReadBytes(poImgFile.ContentLength);
+                    HttpPostedFileBase poImgFile = Request.Files["UserPhoto"];
+
+                    using (var binary = new BinaryReader(poImgFile.InputStream))
+                    {
+                        imageData = binary.ReadBytes(poImgFile.ContentLength);
+                    }
                 }
+
+                ApplicationUser applicationUser = new ApplicationUser();
+
+                var userName = User.Identity.Name;
+                applicationUser.UserName = userName;
+                applicationUser.UserPhoto = imageData;
+                applicationUser.Alias = model.NewName;
+                applicationUser.TextAbout = model.About;
+                applicationUser.Age = model.Age;
+                applicationUser.invisibile = model.Invisible;
+                userRepository.edit(applicationUser);
+
+                return RedirectToAction("ProfileInfo");
             }
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
 
-            ApplicationUser applicationUser = new ApplicationUser();
-
-            var userName = User.Identity.Name;
-            applicationUser.UserName = userName;
-            applicationUser.UserPhoto = imageData;
-            applicationUser.Alias = model.NewName;
-            applicationUser.TextAbout = model.About;
-            applicationUser.Age = model.Age;
-            applicationUser.invisibile = model.Invisible;
-            userRepository.edit(applicationUser);
-            return RedirectToAction("ProfileInfo");
-        }
+            return View("editProfile");
+         
+    }
         [Authorize]
         public ActionResult ProfileInfo(ProfileViewModel model)
         {
