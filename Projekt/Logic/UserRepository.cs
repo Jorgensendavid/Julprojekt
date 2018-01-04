@@ -31,6 +31,7 @@ namespace Logic
             usr.Alias = user.Alias;
             usr.UserPhoto = user.UserPhoto;
             usr.Age = user.Age;
+            usr.invisibile = user.invisibile;
 
             db.SaveChanges();
 

@@ -57,6 +57,7 @@ namespace Projekt.Controllers
             applicationUser.Alias = model.NewName;
             applicationUser.TextAbout = model.About;
             applicationUser.Age = model.Age;
+            applicationUser.invisibile = model.Invisible;
             userRepository.edit(applicationUser);
             return RedirectToAction("ProfileInfo");
         }
@@ -67,6 +68,7 @@ namespace Projekt.Controllers
 
             model.Alias = user.Alias;
             model.TextAbout = user.TextAbout;
+            model.Age = user.Age;
 
             var userName = User.Identity.Name;
             var sender1 = db.Users.Single(x => x.UserName == userName);
@@ -103,7 +105,8 @@ namespace Projekt.Controllers
             {
                 Alias = user.Alias,
                 TextAbout = user.TextAbout,
-                ProfileID = id,               
+                ProfileID = id, 
+                Age = user.Age
             };
 
             var userid = db.Users.Single(x => x.Id == id);

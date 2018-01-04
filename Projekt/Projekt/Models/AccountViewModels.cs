@@ -121,6 +121,8 @@ namespace Projekt.Models
     {
         public string TextAbout { get; set; }
         public string Alias { get; set; }
+        public int Age { get; set; }
+
     }
 
     public class ViewProfilesModel
@@ -128,6 +130,7 @@ namespace Projekt.Models
         public string TextAbout { get; set; }
         public string Alias { get; set; }
         public string ProfileID { get; set; }
+        public int Age { get; set; }
     }
 
     public class FriendViewModel

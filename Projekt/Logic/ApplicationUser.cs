@@ -16,6 +16,7 @@ namespace Logic
         public byte[] UserPhoto { get; set; }
         public string Alias { get; set; }
         public int Age { get; set; }
+
         public virtual ICollection<Post> posts { get; set; }
         public virtual ICollection<Friend> friends { get; set; }
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)

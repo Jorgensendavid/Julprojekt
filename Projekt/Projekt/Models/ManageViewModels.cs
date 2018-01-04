@@ -101,6 +101,9 @@ namespace Projekt.Models
         [Required]
         [Display(Name = "User Photo")]
         public byte[] UserPhoto { get; set; }
+
+        [Display(Name = "Invisible?")]
+        public bool Invisible { get; set; }
     }
 
 
