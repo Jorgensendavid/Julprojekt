@@ -25,8 +25,10 @@ namespace Projekt.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 String userId = User.Identity.GetUserId();
+                var user = userRepository.getUserId(userId);
+                byte[] noImg = new byte[0];
 
-                if (userId == null)
+                if (user.UserPhoto.Length == noImg.Length)
                 {
                     string fileName = HttpContext.Server.MapPath(@"~/Images/noImg.png");
 
@@ -55,8 +57,26 @@ namespace Projekt.Controllers
         //Hämtar andra användares bilder
         public FileContentResult UserPhotoOthers(string id)
         {
-            var userID = userRepository.getUserId(id);
-            return new FileContentResult(userID.UserPhoto, "image/jpeg");
+
+            var user = userRepository.getUserId(id);
+            byte[] noImg = new byte[0];
+
+            if (user.UserPhoto.Length == noImg.Length)
+            {
+                string fileName = HttpContext.Server.MapPath(@"~/Images/noImg.png");
+
+                byte[] imageData = null;
+                FileInfo fileInfo = new FileInfo(fileName);
+                long imageFileLength = fileInfo.Length;
+                FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+                BinaryReader br = new BinaryReader(fs);
+                imageData = br.ReadBytes((int)imageFileLength);
+
+                return File(imageData, "image/png");
+
+            }
+
+            return new FileContentResult(user.UserPhoto, "image/jpeg");
         }
 
     }

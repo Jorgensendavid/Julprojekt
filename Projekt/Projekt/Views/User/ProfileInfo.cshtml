@@ -26,15 +26,16 @@
         <li class="list-group-item text-muted" contenteditable="false">Profile</li>
         <li class="list-group-item text-right"><span class="pull-left"><strong class="">Name</strong></span>@Html.DisplayFor(model => model.Alias)</li>
         <li class="list-group-item text-right"><span class="pull-left"><strong class="">Age</strong></span> @Html.DisplayFor(model => model.Age)</li>
-        <li class="list-group-item text-right">
-            <span class="pull-left"><strong class="">Real name</strong></span> Joseph
-            Doe
-        </li>
-        <li class="list-group-item text-right">
-            <span class="pull-left"><strong class="">Role: </strong></span> Pet Sitter
 
-        </li>
     </ul>
+    <span class="pull-left">
+        <strong class="">
+
+            @Html.ActionLink("Edit Profile", "editProfile", "User")<span class="pull-left"></span>
+
+
+        </strong>
+    </span>
 </div>
 
 
@@ -49,11 +50,7 @@
 </div>
 
 
-<div class="col-sm-3">
-    <p>
-        @Html.ActionLink("Edit Profile", "editProfile", "User")<span class="pull-left"></span>
-    </p>
-</div>
+
 <div class="col-sm-9" style="" contenteditable="false">
     <div class="panel panel-default">
         <div class="panel-heading">My Posts</div>
