@@ -86,7 +86,6 @@ namespace Projekt.Models
         [Display(Name = "Name")]
         public string Alias { get; set; }
 
-        [Required]
         [DataType(DataType.ImageUrl)]
         [Display(Name = "Userphoto")]
         public byte[] UserPhoto { get; set; }
