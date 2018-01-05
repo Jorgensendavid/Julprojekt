@@ -1,4 +1,19 @@
-﻿
+﻿@using Projekt.Models
+@{
+    Logic.ApplicationDbContext db = new Logic.ApplicationDbContext();
+    var NewFriendList = ViewBag.NewFriend;
+    var userName = User.Identity.Name;
+
+    bool NewFriend = false;
+    foreach (Logic.Friend friend in NewFriendList)
+    {
+        if(friend.Receiver.UserName.Equals(userName))
+        {
+            NewFriend = true;
+        }
+    }
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,13 +33,17 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink(Projekt.Resources.HomeText.Home, "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink(Projekt.Resources.HomeText.Profile, "ProfileInfo", "User")</li>
                     <li>@Html.ActionLink(Projekt.Resources.HomeText.Friends, "Friends", "User")</li>
                     <li>@Html.ActionLink(Projekt.Resources.HomeText.Language, "Language", "Language")</li>
+                   @if (NewFriend)
+                   {
+                    <li>   @Html.ActionLink(Projekt.Resources.HomeText.NewFriendRequest, "ListPotentialFriends", "User", null, new { @style = "color:#87CEFA;"}) </li>
+                   }
 
                 </ul>
                 @Html.Partial("_LoginPartial")

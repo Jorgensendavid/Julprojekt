@@ -120,10 +120,31 @@
   <data name="Friends" xml:space="preserve">
     <value>Vänner</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hej</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Startsida</value>
+  </data>
   <data name="Language" xml:space="preserve">
     <value>Språk</value>
   </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Logga In</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Logga Ut</value>
+  </data>
+  <data name="NewFriendRequest" xml:space="preserve">
+    <value>Ny Vänförfrågan</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>Din Profil</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Registrera</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Sök</value>
   </data>
 </root>

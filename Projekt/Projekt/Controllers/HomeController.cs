@@ -10,7 +10,7 @@ using System.Web.Mvc;
 
 namespace Projekt.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         UserRepository userRepository = new UserRepository();
         private ApplicationDbContext db = new ApplicationDbContext();

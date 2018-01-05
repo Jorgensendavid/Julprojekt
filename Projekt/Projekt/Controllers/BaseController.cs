@@ -12,6 +12,25 @@ namespace Projekt.Controllers
     {
         protected ApplicationDbContext db = new ApplicationDbContext();
 
+
+        public BaseController()
+        {
+            List<Friend> FriendRequest = new List<Friend>();
+            {
+                var allFriends = db.Friends.ToList();
+
+                foreach (Friend friend in allFriends)
+                {
+                    if(friend.Accepted == false)
+                    {
+                        FriendRequest.Add(friend);
+                    }
+                }
+            }
+            ViewBag.NewFriend = FriendRequest;
+
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing) db.Dispose();

@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace Projekt.Controllers
 {
-    public class LanguageController: Controller
+    public class LanguageController: BaseController
     {
         public ActionResult Language()
         {
