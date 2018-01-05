@@ -61,6 +61,7 @@
     </ul>
 
     <span class="pull-left"><strong class="">
+    @*Om alreadyfriends är true så ska lägg till vän försvinna*@
     @if (!alreadyfriends)
     {
         @Html.ActionLink("Lägg till " + Model.Alias + " som vän", "AddFriends", "User", new { id = Model.ProfileID }, null)

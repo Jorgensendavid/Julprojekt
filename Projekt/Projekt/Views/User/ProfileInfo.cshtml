@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "About";
-    var Sender = ViewBag.Sender;
 
 }
 
@@ -59,7 +58,7 @@
     <div class="panel panel-default">
         <div class="panel-heading">My Posts</div>
         <div class="panel-body">
-           
+           @*Loopar igenom viewbag listan med inlägg*@ 
             <ul>
                 @foreach (var post in ViewBag.list)
         {

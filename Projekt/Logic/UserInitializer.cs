@@ -18,7 +18,7 @@ namespace Logic
         {
             var store = new UserStore<ApplicationUser>(context);
             var userManager = new ApplicationUserManager(store);
-
+            //ger exempelanvändarna en default bild
             byte[] imageData = null;
             string fileName = HttpContext.Current.Server.MapPath(@"~/Images/noImg.png");
 
@@ -27,7 +27,7 @@ namespace Logic
             FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             BinaryReader br = new BinaryReader(fs);
             imageData = br.ReadBytes((int)imageFileLength);
-
+            //skapar 19st användare som kan användas som exempelanvändare i projektet
             for (int i = 0; i < 20; i++)
             {
                 var user = new ApplicationUser { UserName = $"test{i}@test.se", Email = $"test{i}@test.se", Alias = $"user{i}", UserPhoto = imageData, invisibile = true };
@@ -36,22 +36,5 @@ namespace Logic
 
             base.Seed(context);
         }
-
-        //private static void SeedUsers(ApplicationDbContext context)
-        //{
-        //    //var store = new CustomUserStore(context);
-
-        //    //var userManager = new ApplicationUserManager(store);
-
-        //    //var user1 = new ApplicationUser { UserName = "david@david.se", Email = "david@david.se", Alias ="David"  };
-        //    //var user2 = new ApplicationUser { UserName = "amanda@amanda.se", Email = "amanda@amanda.se", Alias = "Amanda" };
-        //    //var user3 = new ApplicationUser { UserName = "sture@sture.se", Email = "sture@sture.se", Alias = "Sture" };
-        //    //var user4 = new ApplicationUser { UserName = "ezequel@ezequel.se", Email = "ezequel@sture.se", Alias = "Ezequel" };
-
-        //    //userManager.CreateAsync(user4, "Ezequel!").Wait();
-        //    //userManager.CreateAsync(user3, "Sture!").Wait();
-        //    //userManager.CreateAsync(user2, "Amanda1!").Wait();
-        //    //userManager.CreateAsync(user1, "David1!").Wait();
-        //}
     }
 }

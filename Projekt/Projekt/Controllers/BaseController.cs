@@ -15,6 +15,8 @@ namespace Projekt.Controllers
 
         public BaseController()
         {
+            //Loopar igenom en lista med vänner för att få fram om man har några nya vänner 
+            //och skickar de vidare i en viewbag
             List<Friend> FriendRequest = new List<Friend>();
             {
                 var allFriends = db.Friends.ToList();

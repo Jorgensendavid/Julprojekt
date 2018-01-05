@@ -13,13 +13,9 @@ namespace Projekt.Controllers
     public class HomeController : BaseController
     {
         UserRepository userRepository = new UserRepository();
-        private ApplicationDbContext db = new ApplicationDbContext();
         public ActionResult Index()
-        {
-            
+        { 
                 return View(userRepository.StartUsers());
-            
-           
         }
 
    
@@ -44,7 +40,7 @@ namespace Projekt.Controllers
                     return File(imageData, "image/png");
 
                 }
-                // to get the user details to load user Image
+                // Hämtar användaren så uppladning av bild kan ske
                 var bdUsers = HttpContext.GetOwinContext().Get<ApplicationDbContext>();
                 var userImage = bdUsers.Users.Where(x => x.Id == userId).FirstOrDefault();
               
@@ -55,6 +51,8 @@ namespace Projekt.Controllers
                 return null;
             }
         }
+
+        //Hämtar andra användares bilder
         public FileContentResult UserPhotoOthers(string id)
         {
             var userID = userRepository.getUserId(id);

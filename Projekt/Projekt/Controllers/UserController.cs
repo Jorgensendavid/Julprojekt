@@ -15,7 +15,7 @@ namespace Projekt.Controllers
         UserRepository userRepository = new UserRepository();
         public ActionResult Index(string searchString,ApplicationUser model)
         {
-
+            //Hämtar alla sökbara användare med en linq-funktion
             var findUser = from m in db.Users
                            where m.invisibile == true
                            select m ;
@@ -50,7 +50,7 @@ namespace Projekt.Controllers
                         imageData = binary.ReadBytes(poImgFile.ContentLength);
                     }
                 }
-
+                
                 ApplicationUser applicationUser = new ApplicationUser();
 
                 var userName = User.Identity.Name;
@@ -80,9 +80,10 @@ namespace Projekt.Controllers
 
             var userName = User.Identity.Name;
             var sender1 = db.Users.Single(x => x.UserName == userName);
+            //Hämtar apicontroller metoden och anänder användarens id för att hämta inläggen
             var listOfPosts = new PostsController().GetRelevantPosts(sender1.Id);
-           
             var postList = new List<string[]>();
+            //Loopar igenom listan med inlägg ifall användaren har fler än 0
             if (listOfPosts.Count > 0)
             {
                 foreach (Post post in listOfPosts)
@@ -98,7 +99,7 @@ namespace Projekt.Controllers
                 string[] postArray = new string[2] { "You have no Posts yet", "" };
                 postList.Add(postArray);
             }
-
+            //skickar listan med inlägg till en viewbag
             ViewBag.list = postList;
 
             return View(model);
@@ -118,10 +119,10 @@ namespace Projekt.Controllers
             };
 
             var userid = db.Users.Single(x => x.Id == id);
-
+            //Hämtar apicontroller metoden och anänder användarens id för att hämta inläggen
             var listOfPosts = new PostsController().GetRelevantPosts(userid.Id);
-
             var postList = new List<string[]>();
+            //loopar igenom listan med inlägg eller sätter en defualt text
             if (listOfPosts.Count > 0)
             {
                 foreach (Post post in listOfPosts)
@@ -141,10 +142,12 @@ namespace Projekt.Controllers
           
             var userName = User.Identity.Name;
             var sender1 = db.Users.Single(x => x.UserName == userName);
+            //skickar listan, sender och reciver i viewbags.
             ViewBag.Sender = sender1.Id;
             ViewBag.list = postList;
             ViewBag.profilID = userid.Id;
 
+            //Kollar ifall man är vän och skickar det i en viewbag
             ViewBag.AlreadyFriends = false;
             if (AlreadyFriends(sender1.Id, userid.Id))
             {
@@ -174,7 +177,7 @@ namespace Projekt.Controllers
         [Authorize]
         public ActionResult ListPotentialFriends()
         {
-
+            //skapar en lista för att loopa igenon och tar fram användarens vänner som inte är accepterade
             List<Friend> NewFriendsList = new List<Friend>();
             {
                 var user = User.Identity.Name;
@@ -210,7 +213,7 @@ namespace Projekt.Controllers
             }
             var MyAcceptedFriends = new List<ApplicationUser>();
             var UserList = db.Users.ToList();
-
+            //loopar igenom listan med användare för att få fram sina personliga vänner och returnerar dem.
             foreach (ApplicationUser appuser in UserList)
             {
                 foreach (Friend friend in AcceptedFriendsList)
@@ -244,7 +247,7 @@ namespace Projekt.Controllers
 
              foreach (Friend notacceptedfriend in FriendsWithRequestPendingList)
             {
-                if (notacceptedfriend.ID.ToString() ==id && notacceptedfriend.Receiver.UserName.Equals(userName))
+                if (notacceptedfriend.ID.ToString() == id && notacceptedfriend.Receiver.UserName.Equals(userName))
                 {
                     notacceptedfriend.Accepted = true;
                 }

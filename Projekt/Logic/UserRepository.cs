@@ -38,6 +38,7 @@ namespace Logic
         }
         public List<ApplicationUser> StartUsers()
         {
+            //använder random funktion för att få fram 3 användare på startsidan
             List<ApplicationUser> RandomUsers()
             {
                 var list = new List<ApplicationUser>();

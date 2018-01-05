@@ -29,6 +29,7 @@ namespace Projekt.Controllers
             
             return Posts;
         }
+        //Sparar ner datan från vyn och konverterar strängarna till applicationusers
         [HttpPost, ActionName("addPost")]
         public void addPost([FromBody] PostViewModel model)
         {

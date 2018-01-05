@@ -1,5 +1,6 @@
 ﻿@using Projekt.Models
 @{
+    //Hämtar viewbag friend och kollar om den har några nya vänförfrågningar 
     Logic.ApplicationDbContext db = new Logic.ApplicationDbContext();
     var NewFriendList = ViewBag.NewFriend;
     var userName = User.Identity.Name;
@@ -40,7 +41,8 @@
                     <li>@Html.ActionLink(Projekt.Resources.HomeText.Profile, "ProfileInfo", "User")</li>
                     <li>@Html.ActionLink(Projekt.Resources.HomeText.Friends, "Friends", "User")</li>
                     <li>@Html.ActionLink(Projekt.Resources.HomeText.Language, "Language", "Language")</li>
-                   @if (NewFriend)
+                  @*Om man har någon ny vänförfrågan så visas en nya vänner med en csskodad färg*@
+                    @if (NewFriend)
                    {
                     <li>   @Html.ActionLink(Projekt.Resources.HomeText.NewFriendRequest, "ListPotentialFriends", "User", null, new { @style = "color:#87CEFA;"}) </li>
                    }
